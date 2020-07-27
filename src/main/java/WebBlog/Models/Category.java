@@ -14,24 +14,25 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "Category")
 @EntityListeners(AuditingEntityListener.class)
 public class Category {
-
-	private int Id;
-	private String Name;
 	@Id
-	@Column(name = "Id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column(name = "name",columnDefinition = "varchar(50) default 'no name' not null")
+	private String name;
+	
 	public int getId() {
-		return Id;
+		return id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
-	@Column(name = "Name", nullable = true, length = 20)
+
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 }

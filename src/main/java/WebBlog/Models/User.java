@@ -14,76 +14,63 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "User")
 @EntityListeners(AuditingEntityListener.class)
 public class User {
-	private int Id;
-	private String UserName;
-	private String Password;
-	private String Name;
-	private String Address;
-	private Date DoB;
-	private boolean Gender;
-
 	@Id
 	@GeneratedValue
+	private int id;
+	@Column(name = "userName", nullable = false)
+	private String userName;
+	@Column(name = "password", nullable = false)
+	private String password;
+	@Column(name = "name", nullable = false)
+	private String name;
+	@Column(name = "adress", nullable = true)
+	private String address;
+	@Column(name = "doB", nullable = false)
+	private Date doB;
+	@Column(name = "gender", nullable = false)
+	private boolean gender;
 	public int getId() {
-		return Id;
+		return id;
 	}
-
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
-
-	@Column(name = "UserName", nullable = false)
 	public String getUserName() {
-		return UserName;
+		return userName;
 	}
-
 	public void setUserName(String userName) {
-		UserName = userName;
+		this.userName = userName;
 	}
-
-	@Column(name = "Password", nullable = false)
 	public String getPassword() {
-		return Password;
+		return password;
 	}
-
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
-
-	@Column(name = "Name", nullable = false)
 	public String getName() {
-		return Name;
+		return name;
 	}
-
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
-
-	@Column(name = "Adress", nullable = true)
 	public String getAddress() {
-		return Address;
+		return address;
 	}
-
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
-
-	@Column(name = "DoB", nullable = false)
 	public Date getDoB() {
-		return DoB;
+		return doB;
 	}
-
 	public void setDoB(Date doB) {
-		DoB = doB;
+		this.doB = doB;
 	}
-
-	@Column(name = "Gender", nullable = false)
 	public boolean isGender() {
-		return Gender;
+		return gender;
 	}
-
 	public void setGender(boolean gender) {
-		Gender = gender;
+		this.gender = gender;
 	}
 
+	
 }
