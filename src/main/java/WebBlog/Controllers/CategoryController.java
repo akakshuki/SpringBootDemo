@@ -26,7 +26,6 @@ public class CategoryController {
 
 	@RequestMapping("/Category_frm")
 	public String CategoryFrm(Model model) {
-
 		return "categoryFrm";
 	}
 

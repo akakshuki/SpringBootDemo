@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
 	href="webjars/bootstrap/4.5.0/css/bootstrap.css" media="all">
-</head>
+<link href="admin/vendor/fontawesome-free/css/all.min.css"
+	rel="stylesheet" type="text/css"></head>
 <body>
 	<h1 class="container text-center">
 		Web have some errors
