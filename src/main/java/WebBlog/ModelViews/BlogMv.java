@@ -4,7 +4,8 @@ import java.util.Date;
 
 import WebBlog.Models.Category;
 import WebBlog.Models.User;
-
+import lombok.Data;
+@Data
 public class BlogMv {
 
     private int Id;

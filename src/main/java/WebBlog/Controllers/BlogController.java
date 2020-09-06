@@ -5,7 +5,10 @@ import java.util.List;
 
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +32,9 @@ public class BlogController {
 	@RequestMapping("/blogges")
 	public String GetAllBlog(Model model) {
 		var ls = _blog.findAll();
+		ls.get(0).getComments().forEach(x -> System.out.println(x.getContent()));
 		List<BlogMv> listData = ls.stream()
-				.map(element -> new BlogMv(element.getId(), element.getName(), element.getCategoryId(),
+				.map(element -> new BlogMv (element.getId(), element.getName(), element.getCategory().getId(),
 						element.getUserId(), element.getContent(), element.getDateCreate()))
 				.collect(Collectors.toList());
 		listData.stream().forEach(blogMv -> {
@@ -48,11 +52,14 @@ public class BlogController {
 		return "blogfrm";
 	}
 
-	@RequestMapping(value = "/blogcrt", method = RequestMethod.POST)
-	public String CreateBlog(Blog blog) {
-		var date = new Date();
-		blog.setDateCreate(date);
+	@RequestMapping(value = "/blogcrt", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public String CreateBlog(BlogMv blogData) {
+		var blog = new Blog();
+		blog.setDateCreate(new Date());
 		blog.setUserId(2);
+		blog.setCategory(_category.findById(blogData.getCategoryId()).get());
+		blog.setContent(blogData.getContent());
+		blog.setName(blogData.getName());
 		_blog.save(blog);
 		return "redirect:/blogges";
 	}
@@ -69,7 +76,7 @@ public class BlogController {
 		var data = _blog.findById(blogData.getId()).get();
 		data.setName(blogData.getName());
 		data.setContent(blogData.getContent());
-		data.setCategoryId(blogData.getCategoryId());
+		data.setCategory(_category.findById(blogData.getCategory().getId()).get());
 		_blog.save(data);
 		return "redirect:/blogges";
 	}
@@ -78,6 +85,12 @@ public class BlogController {
 	public String deleteBlog(@RequestParam int id) {
 		_blog.deleteById(id);
 		return "redirect:/blogges";
+	}
+
+	@RequestMapping("/serlet")
+	public String letsShoutDude(HttpServletRequest request) {
+		return "hello";
+
 	}
 
 }

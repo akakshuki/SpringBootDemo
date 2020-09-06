@@ -3,6 +3,7 @@ package WebBlog.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ public class CategoryController {
 	ICategoryRes _category;
 
 	@RequestMapping("/Category")
+	@Async
 	public String CategoryMrg(Model model) {
 		List<Category> ls = _category.findAll();
 		model.addAttribute("categories", ls);
